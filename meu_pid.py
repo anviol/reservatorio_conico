@@ -89,8 +89,8 @@ def pid_simulator():
 
     # gain values          # P = 0.82 / I = 0.15 / D = 0.40
     proportional_gain_value = 0.82
-    integral_gain_value = 0.155
-    derivative_gain_value = 0.45
+    integral_gain_value = 0.15
+    derivative_gain_value = 0.40
     #proportional_gain_value = 1
     #integral_gain_value = 0
     #derivative_gain_value = 0
@@ -112,11 +112,11 @@ def pid_simulator():
         if x_value == number_of_iterations / 5:
             setpoint_value = 100
         if x_value == number_of_iterations / 2:
-            setpoint_value = -300
+            setpoint_value = 200
         if x_value == 6 * (number_of_iterations / 10):
-            setpoint_value = -200
+            setpoint_value = 300
         if x_value == 7 * (number_of_iterations / 10):
-            setpoint_value = -250
+            setpoint_value = 400
         if x_value == (number_of_iterations - (number_of_iterations / 5)):
             setpoint_value = 0
 

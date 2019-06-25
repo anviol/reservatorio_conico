@@ -6,47 +6,43 @@
 # Professor: Armando Alves Neto                                                #
 #                                                                              #
 # Nome: Andre Vinicius de Oliveira          Matricula: 2013065935              #
-# Nome: Grabriel                                                               #
+# Nome: Luiz Gabriel Aragão Oliveira        Matricula:2014086480               #
 #                                                                              #
 # Versão: 1.00                                                                 #
 # Data: 22/05/2019                                                             #
 #                                                                              #
 #                                 Python 3.7.3                                 #
 ################################################################################
- 
-import matplotlib.pyplot as plt
-import numpy as np
-import random as rand
-import simple_pid as pid
+import threading
+import time
 
-Cv = 0.5
-R0 = 100
-R1 = 10
-H = 10
-Pi = 3.14
-alpha = (R1 - R0)/H
+message = "Thread sendo executada: "
+i = 0
 
-tam = input('Digite o range do array: ')
+def process_thread():
+   global message
+   print(message + "process_thread" + ".")
 
-try:
-   tam = int(tam)
-except ValueError:
-   print("O valor digitado não é um número")
-   exit()
+def softPLC_thread():
+   global message
+   print (message + "softPLC_thread" + ".")
 
-h = [0]*tam
-Qout = [0]*tam
-Qin = [0]*tam
+def synoptic_process():
+   global message
+   global i
+   t1 = threading.Thread(target=process_thread)
+   t1.start()
+   t2 = threading.Thread(target=softPLC_thread)
+   t2.start()
+   print (message + "synoptic_process" + ".")
 
-for i in range(tam):
-   h[i] = i
-   Qout [i] = Cv * (h[i]**0.5)
+t = threading.Thread(target=synoptic_process)
+t.start()
 
+while t.isAlive():
+   i = 0
 
-
-plt.plot( h, Qout)
-plt.title("Volume X Altura")
-plt.show()
-
+print ("Threads morreram")
+print ("Finalizando programa")
 
 ################################ Fim do Programa ###############################
